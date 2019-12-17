@@ -1179,6 +1179,9 @@ public final class LocalUtil
         String remappedClassName = remappedDwrClassName(className);
         Class<?> clazz = null;
         try {
+          if (remappedClassName.startsWith("response:")) {
+            remappedClassName = remappedClassName.substring("response:".length());
+          }
             clazz = Thread.currentThread().getContextClassLoader().loadClass(remappedClassName);
         } catch(ClassNotFoundException ex) {
             clazz = LocalUtil.class.getClassLoader().loadClass(remappedClassName);
